@@ -129,6 +129,7 @@ Here is the tech stack you will be using in this setup.
 
 - [Ray](https://github.com/ray-project/ray): Open-source distributed computing framework For Python & AI Workloads
 - [CML](https://github.com/iterative/cml): CI/CD for Machine Learning Projects
+- [Dagster](https://github.com/dagster-io/dagster): Cloud-native data pipeline orchestrator
 
 ## License
 
