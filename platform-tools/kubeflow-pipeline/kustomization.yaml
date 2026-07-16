@@ -1,0 +1,131 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - github.com/kubeflow/pipelines/manifests/kustomize/env/cert-manager/platform-agnostic-standalone-tls?ref=2.16.1
+  - github.com/kubeflow/pipelines/manifests/kustomize/env/cert-manager/base?ref=2.16.1
+
+patches:
+  - target:
+      kind: Service
+      name: ml-pipeline
+    patch: |
+      - op: replace
+        path: /spec/type
+        value: NodePort
+      - op: add
+        path: /spec/ports/0/nodePort
+        value: 30088
+
+  - target:
+      kind: Service
+      name: ml-pipeline-ui
+    patch: |
+      - op: replace
+        path: /spec/type
+        value: NodePort
+      - op: add
+        path: /spec/ports/0/nodePort
+        value: 30080
+
+  - target:
+      kind: NetworkPolicy
+      name: default-allow-same-namespace
+    patch: |
+      $patch: delete
+      apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: default-allow-same-namespace
+
+  - target:
+      kind: NetworkPolicy
+      name: seaweedfs
+    patch: |
+      $patch: delete
+      apiVersion: networking.k8s.io/v1
+      kind: NetworkPolicy
+      metadata:
+        name: seaweedfs
+
+  - target:
+      kind: Deployment
+      name: seaweedfs
+    patch: |
+      - op: add
+        path: /spec/template/spec/securityContext
+        value:
+          fsGroup: 1000
+          runAsUser: 1000
+          runAsGroup: 1000
+
+  - target:
+      kind: Deployment
+      name: cache-server
+    patch: |
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --tls_cert_filename=tls.crt
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --tls_key_filename=tls.key
+
+  - target:
+      kind: Deployment
+      name: cache-deployer-deployment
+    patch: |
+      $patch: delete
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: cache-deployer-deployment
+
+  - target:
+      kind: ServiceAccount
+      name: kubeflow-pipelines-cache-deployer-sa
+    patch: |
+      $patch: delete
+      apiVersion: v1
+      kind: ServiceAccount
+      metadata:
+        name: kubeflow-pipelines-cache-deployer-sa
+
+  - target:
+      kind: Role
+      name: kubeflow-pipelines-cache-deployer-role
+    patch: |
+      $patch: delete
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: Role
+      metadata:
+        name: kubeflow-pipelines-cache-deployer-role
+
+  - target:
+      kind: RoleBinding
+      name: kubeflow-pipelines-cache-deployer-rolebinding
+    patch: |
+      $patch: delete
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: RoleBinding
+      metadata:
+        name: kubeflow-pipelines-cache-deployer-rolebinding
+
+  - target:
+      kind: ClusterRole
+      name: kubeflow-pipelines-cache-deployer-clusterrole
+    patch: |
+      $patch: delete
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRole
+      metadata:
+        name: kubeflow-pipelines-cache-deployer-clusterrole
+
+  - target:
+      kind: ClusterRoleBinding
+      name: kubeflow-pipelines-cache-deployer-clusterrolebinding
+    patch: |
+      $patch: delete
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: ClusterRoleBinding
+      metadata:
+        name: kubeflow-pipelines-cache-deployer-clusterrolebinding

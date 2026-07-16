@@ -1,135 +1,143 @@
 # MLOps for DevOps Engineers
 
-A hands-on, project-based guide to Machine Learning Operations — built specifically for DevOps, Platform, and SRE engineers.
+A hands-on, project-based guide to Machine Learning Operations built specifically for DevOps, Platform, and SRE engineers.
 
-[![Code: Apache 2.0](https://img.shields.io/badge/Code-Apache%202.0-blue.svg)](licenses/LICENSE-CODE)
-[![Content: All Rights Reserved](https://img.shields.io/badge/Content-All%20Rights%20Reserved-red.svg)](licenses/LICENSE-CONTENT)
-[![GitHub Stars](https://img.shields.io/github/stars/techiescamp/mlops-for-devops?style=social)](https://github.com/techiescamp/mlops-for-devops)
+> No ML background required. Every concept is explained through DevOps analogies you already understand.
 
-> **No ML background required.** Every concept is explained through DevOps analogies you already understand.
-> If you are completely new to the MLOPS concept, please read our [DevOps to MLOps](https://devopscube.com/devops-to-mlops/) guide first.
+If you are completely new to MLOps, read our [DevOps to MLOps guide](https://devopscube.com/devops-to-mlops/) first.
 
-## Hit the Star! :star:
+---
 
-If you are planning to use this repo for reference, please hit the star. Thanks!
+Hit the Star! ⭐
+If you are planning to use this repo for learning MLOps, please hit the star. Thanks!
 
+---
 ## Table of Contents
 
-- [What Is This?](#what-is-this)
-- [Use Case](#use-case)
+- [Who This Is For](#who-this-is-for)
+- [What We Build](#what-we-build)
 - [Prerequisites](#prerequisites)
+- [Phase 1: Local Dev & Pipelines](#phase-1-local-development--data-pipelines)
+- [Phase 2: Enterprise Orchestration for ML](#phase-2-enterprise-orchestration-for-ml)
 - [Learning Path](#learning-path)
-  - [Phase 1: Local Development & Data Pipelines](#phase-1-local-development--data-pipelines)
-  - Phase 2 — Deployment & Model Serving *(coming soon)*
-  - Phase 3 — Enterprise Orchestration *(coming soon)*
-  - Phase 4 — Model Observability & Monitoring *(coming soon)*
-  - Phase 5 — Foundational Models *(coming soon)*
 - [Tech Stack](#tech-stack)
 - [Recommended Reading](#recommended-reading)
-- [Contributing](#contributing)
 - [License](#license)
 
-## What Is This?
+---
 
-Most MLOps resources are written for data scientists learning 
-infrastructure. This repo flips that. It is written for **DevOps 
-engineers learning ML operations**.
+## Who This Is For
 
-You do not need to become a data scientist. But just like understanding 
-how a Java application is built makes you a better DevOps engineer, 
-understanding how an ML model is built, trained, and served makes you 
-effective at operating ML workloads in production.
+Most MLOps resources are written for data scientists learning infrastructure. This repo flips that.
 
-Here is what we build, end to end:
+**You do not need to become a data scientist**. But just like understanding how a Java application is built makes you a better DevOps engineer, understanding how an ML model is built, trained, and served makes you effective at operating ML workloads in production.
 
-**🤖 Traditional ML**
-- Train and evaluate a real employee attrition prediction model locally
-- Package and serve the model as an API on Kubernetes
-- Automate the full ML pipeline with Kubeflow and MLflow
-- Monitor model performance and detect drift in production
+---
 
-**🧠 Foundational Models**
-- Serve large language models in production using vLLM, TGI, and Ollama
-- Handle LLM hosting challenges, scaling, token optimization, cost
-- Learn how enterprises solve these problems in real projects
+## What We Build
 
-**⚙️ LLM-Powered DevOps**
-- Monitor Kubernetes clusters using LLMs
-- Build internal chatbots, RAG pipelines, and agents
-- Everything runs on Kubernetes, Docker, and tools you already use.
+We'll start with the **basics of building and training a mode**l, then work our way up to production-ready MLOps.
 
-AI is moving fast. As new tools and techniques emerge that are relevant 
-for DevOps, SRE, and Platform Engineering, we will cover them here. 
+Just like a DevOps engineer doesn't write the application but understands how it is built and deployed, an MLOps engineer doesn't need to be a data scientist. Understanding the ML workflow helps you build, automate, deploy, and troubleshoot ML systems effectively.
 
-## Use Case
+Everything in this roadmap **runs on Kubernetes, Docker**, and tools you'll use in real-world MLOps platforms.
 
-Every phase uses the same real-world problem: **predicting employee attrition for a large organisation (~500,000 employees)**.
+---
 
-One use case, end to end. This keeps the focus on infrastructure and operations, not data-science theory.
+## Phase 1: Local Development & Data Pipelines (Start Here)
 
-## Prerequisites
+**Goal:** Build the required ML foundation for by building an Employee attrition prediction model from your local systems.
 
-| Skill | Level | Quick Check |
-|-------|-------|-------------|
-| Linux CLI | Intermediate | Can you write a bash script with loops and pipes? |
-| Docker | Intermediate | Can you write a multi-stage Dockerfile? |
-| Kubernetes | Intermediate | Can you deploy an app with Deployments, Services, and Ingress? |
-| Python | Basic | Can you read Python code and run scripts? |
-| Git | Intermediate | Can you branch, merge, and resolve conflicts? |
+**Use case throughout:** Employee attrition prediction for a large organisation (~500,000 employees). One problem, end to end. Keeps the focus on infrastructure and operations, not data science theory.
 
-**No ML experience needed.** That is what this repo teaches.
+| Step | Title | Guide |
+|------|-------|-------|
+| 1 | Project Dataset Pipeline | [Read the Guide](https://newsletter.devopscube.com/p/building-a-dataset-pipeline) |
+| 2 | Data Preparation Stages | [Read the Guide](https://newsletter.devopscube.com/p/mlops-data-preparation) |
+| 3 | Training & Building the Prediction Model | [Read the Guide](https://newsletter.devopscube.com/p/mlops-training-the-model) |
+| 4 | From Model to Live API with KServe | [Read the Guide](https://newsletter.devopscube.com/p/deploying-model-kserve) |
+
+Code: `phase-1-local-dev/`
+
+## Phase 2: Enterprise Orchestration for ML
+
+**Goal:** Replace local, manual ML workflows with production-grade orchestration. Versioned data, automated pipelines, experiment tracking, and scalable training.
+
+| Step | Title | Guide |
+|------|-------|-------|
+| 1 | Data Versioning Fundamentals  | [Read the Guide](https://newsletter.devopscube.com/p/mlops-data-drift-model-decay-and-dataset-versioning) |
+| 2 | Data Version Control (DVC) with AWS S3 | [Read the Guide](https://newsletter.devopscube.com/p/mlops-versioning-data-with-dvc)|
+| 3 | Data Versioning using Airflow on Kubernetes | [Read The Guide](https://newsletter.devopscube.com/p/mlops-airflow-dvc-pipeline)|
+| 4 | Feature Store Fundamentals Explained | [Read The Guide](https://newsletter.devopscube.com/p/mlops-feature-store) |
+| 5 | Hands-on Feature Store with Feast on Kubernetes | [Read The Guide](https://devopscube.com/setup-feature-store-feast-on-kubernetes/) |
+| 6 | Kubeflow Explained for MLOps | [Read The Guide](https://newsletter.devopscube.com/p/kubeflow-pipelines)  |
+| 7 | Hands-on Kubeflow on Kubernetes | [Read The Guide](https://devopscube.com/setup-kubeflow-pipelines-kubernetes/) |
+| 8 | Kubeflow Trainer Explained (Hands-on) | [Read the Guide](https://newsletter.devopscube.com/p/kubeflow-trainer) |
+| 9 | MLflow Explained for MLOps | 🔜 Coming Next |
+| 10| Hands-on MLflow on Kubernetes | 🔜 Coming Next |
+| 11| Model Monitoring Explained | 🔜 Planned |
+| 12| Model Monitoring - Hands On | 🔜 Planned |
+
+Code: `phase-2-enterprise-setup/`
+
+## Capstone MLOps Project: End to Ends MLops Projects on Kubernetes | 🔜 Planned |
+
+In this capstone project, you'll build a production-style MLOps platform on Kubernetes by combining everything you've learned throughout this series.
+
+By the end, you'll have built an enterprise-grade MLOps workflow that mirrors how modern organizations develop, train, track, and operate machine learning models on Kubernetes.
+
+---
 
 ## Learning Path
 
-```
-Phase 1          Phase 2          Phase 3          Phase 4          Phase 5
-─────────        ─────────        ─────────        ─────────        ─────────
- Local Dev   ──▶  Deploy &   ──▶  Enterprise  ──▶  Monitor &  ──▶  Foundation
- & Pipelines      Model Serve      Orchestration     Observe          Models
-```
+| Phase | Track | Title | Status |
+|-------|-------|-------|--------|
+| 1 | 🤖 Traditional ML | [Local Dev & Pipelines](#phase-1-local-development--data-pipelines) | ✅ Done |
+| 1 | 🤖 Traditional ML | K8s Deploy & Model Serving | ✅ Done |
+| 3 | 🤖 Traditional ML | Enterprise Orchestration | 🔄 In Progress |
+| 4 | 🤖 Traditional ML | Monitor & Observe | 🔜 Planned |
 
-### Phase 1: Local Development & Data Pipelines
+---
 
-**Goal:** Build the ML foundation on your local machine.
-
-| Step | Task | Documentation |
-|------|-------|------------|
-| Step 1 | Project Dataset Pipeline Explained | [Read the Guide](https://newsletter.devopscube.com/p/building-a-dataset-pipeline) |
-| Step 2 | Data Preparation Stages (hands-on) | [Read the Guide](https://newsletter.devopscube.com/p/mlops-data-preparation) |
-| Step 3 | Training & Building the Prediction Model (hands on) | Coming Saturday |
-
-**Code:** [`phase-1-local-dev/`](phase-1-local-dev/)
 ## Tech Stack
+
+Here is the tech stack you will be using in this setup.
 
 | Category | Tools |
 |----------|-------|
-| Data Pipeline | Python, Pandas, DVC |
-| Model Training | scikit-learn, XGBoost |
-| API / Serving | FastAPI, Docker, KServe |
-| Orchestration | MLflow, Kubeflow Pipelines |
+| Data Pipeline | Python, Airflow |
+| Model Training | scikit-learn |
+| API / Serving | FastAPI, Flask, Docker, KServe |
+| ML Orchestration | Kubeflow, MLflow Pipelines |
 | Monitoring | Prometheus, Grafana, Evidently AI |
 | Infrastructure | Kubernetes, Helm, GitHub Actions |
-| LLM Serving (Phase 5) | vLLM, TGI, Ollama |
+
+---
 
 ## Recommended Reading
+
 - [Google MLOps Whitepaper](https://cloud.google.com/resources/mlops-whitepaper)
-- [Volkswagen’s End-to-End MLOps Platform on AWS](https://aws.amazon.com/blogs/industries/how-volkswagen-and-aws-built-end-end-mlops-for-digital-production-platform/)
+- [Volkswagen's End-to-End MLOps Platform on AWS](https://aws.amazon.com/solutions/case-studies/volkswagen-mlops/)
 
 ## Certifications
 
-1. [AWS Certified Machine Learning Engineer - Associate](https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/)
-2. [Nvidia AI Infrastructure and Operations](https://www.nvidia.com/en-us/learn/certification/ai-infrastructure-operations-associate/)
+- [AWS Certified Machine Learning Engineer - Associate](https://aws.amazon.com/certification/certified-machine-learning-engineer-associate/)
+- [Nvidia AI Infrastructure and Operations](https://www.nvidia.com/en-us/training/)
 
+---
+## MLOps Tools
 
-## Contributing
-
-Contributions are welcome. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+- [Ray](https://github.com/ray-project/ray): Open-source distributed computing framework For Python & AI Workloads
+- [CML](https://github.com/iterative/cml): CI/CD for Machine Learning Projects
+- [Dagster](https://github.com/dagster-io/dagster): Cloud-native data pipeline orchestrator
+- [Kestra](https://github.com/kestra-io/kestra): Open-source orchestration platform for data, AI, and infrastructure workflows
+- [Flyte](https://flyte.org/): AI orchestration in pure Python
 
 ## License
 
-This repository uses a dual license:
+Dual licensed:
 
-- **Code** (Python scripts, configs, manifests) — [Apache 2.0](licenses/LICENSE-CODE). Free to use with attribution.
-- **Content** (README, guides, documentation) — [All Rights Reserved](licenses/LICENSE-CONTENT). No copying or redistribution permitted.
+- **Code** (scripts, configs, manifests) — Apache 2.0
+- **Content** (README, guides, docs) — All Rights Reserved
 
 For commercial licensing: contact@devopscube.com

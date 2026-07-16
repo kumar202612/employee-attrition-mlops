@@ -1,0 +1,118 @@
+apiVersion: trainer.kubeflow.org/v1alpha1
+kind: TrainJob
+metadata:
+  name: distributed-training
+  namespace: kubeflow-system
+spec:
+  runtimeRef:
+    apiGroup: trainer.kubeflow.org
+    kind: ClusterTrainingRuntime
+    name: torch-distributed
+  trainer:
+    image: pytorch/pytorch:2.5.1-cuda12.1-cudnn9-runtime
+    numNodes: 2
+    command:
+      - bash
+      - -c
+    args:
+      - |
+        cat > /tmp/train.py << 'EOF'
+        import os
+        import torch
+        import torch.nn as nn
+        import torch.distributed as dist
+        from torch.nn.parallel import DistributedDataParallel as DDP
+        from torch.utils.data import DataLoader, TensorDataset
+        from torch.utils.data.distributed import DistributedSampler
+
+        # Get distributed info
+        rank = int(os.environ.get('RANK', 0))
+        world_size = int(os.environ.get('WORLD_SIZE', 1))
+
+        print(f'[Rank {rank}/{world_size}] Starting...')
+        dist.init_process_group(backend='gloo')
+
+        torch.manual_seed(42)
+        
+        num_samples = 1000
+        num_features = 20
+        num_classes = 5
+
+        X = torch.randn(num_samples, num_features)
+        y = torch.randint(0, num_classes, (num_samples,))
+
+        dataset = TensorDataset(X, y)
+        print(f'[Rank {rank}] Dataset: {num_samples} samples, {num_features} features, {num_classes} classes')
+
+        sampler = DistributedSampler(
+            dataset, 
+            num_replicas=world_size, 
+            rank=rank,
+            shuffle=True
+        )
+        dataloader = DataLoader(dataset, batch_size=32, sampler=sampler)
+        
+        print(f'[Rank {rank}] Batches per epoch: {len(dataloader)} (total {num_samples // world_size} samples)')
+
+        model = nn.Sequential(
+            nn.Linear(num_features, 64),
+            nn.ReLU(),
+            nn.Linear(64, 32),
+            nn.ReLU(),
+            nn.Linear(32, num_classes)
+        )
+        model = DDP(model)
+        optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+        criterion = nn.CrossEntropyLoss()
+
+        print(f'[Rank {rank}] Model parameters: {sum(p.numel() for p in model.parameters()):,}')
+        for epoch in range(5):
+            sampler.set_epoch(epoch)
+            model.train()
+            
+            total_loss = 0
+            correct = 0
+            total = 0
+
+            for batch_idx, (data, target) in enumerate(dataloader):
+                optimizer.zero_grad()
+                output = model(data)
+                loss = criterion(output, target)
+                loss.backward()
+                optimizer.step()
+
+                total_loss += loss.item()
+                pred = output.argmax(dim=1)
+                correct += pred.eq(target).sum().item()
+                total += target.size(0)
+
+            accuracy = 100. * correct / total
+            avg_loss = total_loss / len(dataloader)
+            
+            print(f'[Rank {rank}] Epoch {epoch+1}/5 | Loss: {avg_loss:.4f} | Accuracy: {accuracy:.2f}%')
+        dist.barrier()  # Wait for all pods to finish
+        
+        if rank == 0:
+            torch.save(model.module.state_dict(), '/tmp/model.pt')
+            print(f'[Rank 0] Model saved to /tmp/model.pt')
+
+        dist.destroy_process_group()
+        print(f'[Rank {rank}] Done!')
+        EOF
+
+        torchrun --nnodes=${PET_NNODES:-1} \
+                 --nproc_per_node=1 \
+                 --node_rank=${PET_NODE_RANK:-0} \
+                 --master_addr=${PET_MASTER_ADDR:-localhost} \
+                 --master_port=${PET_MASTER_PORT:-29500} \
+                 /tmp/train.py
+    env:
+      - name: PYTHONUNBUFFERED
+        value: "1"
+    resourcesPerNode:
+      requests:
+        cpu: "500m"
+        memory: "1Gi"
+      limits:
+        cpu: "1"
+        memory: "2Gi"
