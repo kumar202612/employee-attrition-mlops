@@ -1,0 +1,4 @@
+[core]
+    remote = ml-dataset
+['remote "ml-dataset"']
+    url = ../devopscube-data-dvc-store

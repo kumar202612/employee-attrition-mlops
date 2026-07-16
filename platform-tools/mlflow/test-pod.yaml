@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: aws-cli
+  namespace: mlflow
+spec:
+  serviceAccountName: mlflow-mlflow
+  restartPolicy: Never
+  containers:
+    - name: aws-cli
+      image: public.ecr.aws/aws-cli/aws-cli:latest
+      command:
+        - sleep
+        - infinity
