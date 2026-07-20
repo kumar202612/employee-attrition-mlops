@@ -1,6 +1,7 @@
 import mlflow
 import mlflow.sklearn
 import pandas as pd
+import skops.io
 
 from mlflow.models import infer_signature
 from sklearn.compose import ColumnTransformer
@@ -106,11 +107,14 @@ with mlflow.start_run(run_name=MODEL_NAME, description=description) as run:
 
     signature = infer_signature(X_train, pipeline.predict(X_train))
 
+    skops_trusted_types = skops.io.get_untrusted_types(data=skops.io.dumps(pipeline))
+
     mlflow.sklearn.log_model(
         sk_model=pipeline,
         name="sklearn-model",
         signature=signature,
         input_example=X_train.head(5),
+        skops_trusted_types=skops_trusted_types,
     )
 
     metrics_str = " ".join(f"{k}={v:.4f}" for k, v in metrics.items())
