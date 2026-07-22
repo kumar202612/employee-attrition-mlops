@@ -133,6 +133,11 @@ Here is the tech stack you will be using in this setup.
 - [Kestra](https://github.com/kestra-io/kestra): Open-source orchestration platform for data, AI, and infrastructure workflows
 - [Flyte](https://flyte.org/): AI orchestration in pure Python
 
+## Engineering Blogs
+
+- [Discord Single-Node to Multi-GPU Clusters](https://discord.com/blog/from-single-node-to-multi-gpu-clusters-how-discord-made-distributed-compute-easy-for-ml-engineers)
+  
+
 ## License
 
 Dual licensed:
