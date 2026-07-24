@@ -7,8 +7,6 @@ A hands-on, project-based guide to Machine Learning Operations built specificall
 If you are completely new to MLOps, read our [DevOps to MLOps guide](https://devopscube.com/devops-to-mlops/) first.
 
 ---
-
-Hit the Star! ⭐
 If you are planning to use this repo for learning MLOps, please hit the star. Thanks!
 
 ---
