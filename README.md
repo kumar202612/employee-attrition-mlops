@@ -7,8 +7,6 @@ A hands-on, project-based guide to Machine Learning Operations built specificall
 If you are completely new to MLOps, read our [DevOps to MLOps guide](https://devopscube.com/devops-to-mlops/) first.
 
 ---
-
-Hit the Star! ⭐
 If you are planning to use this repo for learning MLOps, please hit the star. Thanks!
 
 ---
@@ -36,19 +34,19 @@ Most MLOps resources are written for data scientists learning infrastructure. Th
 
 ## What We Build
 
-We'll start with the **basics of building and training a mode**l, then work our way up to production-ready MLOps.
+We'll start with the **basics of building and training a model, then work our way up to production-ready MLOps.
 
 Just like a DevOps engineer doesn't write the application but understands how it is built and deployed, an MLOps engineer doesn't need to be a data scientist. Understanding the ML workflow helps you build, automate, deploy, and troubleshoot ML systems effectively.
 
-Everything in this roadmap **runs on Kubernetes, Docker**, and tools you'll use in real-world MLOps platforms.
+Everything in this roadmap **runs on Kubernetes and Docker**, and tools you'll use in real-world MLOps platforms.
 
 ---
 
 ## Phase 1: Local Development & Data Pipelines (Start Here)
 
-**Goal:** Build the required ML foundation for by building an Employee attrition prediction model from your local systems.
+**Goal:** Build the required ML foundation by building an Employee attrition prediction model from your local systems.
 
-**Use case throughout:** Employee attrition prediction for a large organisation (~500,000 employees). One problem, end to end. Keeps the focus on infrastructure and operations, not data science theory.
+**Use case throughout:** Employee attrition prediction for a large organisation (~500,000 employees). One problem, end-to-end. Keeps the focus on infrastructure and operations, not data science theory.
 
 | Step | Title | Guide |
 |------|-------|-------|
@@ -73,14 +71,14 @@ Code: `phase-1-local-dev/`
 | 6 | Kubeflow Explained for MLOps | [Read The Guide](https://newsletter.devopscube.com/p/kubeflow-pipelines)  |
 | 7 | Hands-on Kubeflow on Kubernetes | [Read The Guide](https://devopscube.com/setup-kubeflow-pipelines-kubernetes/) |
 | 8 | Kubeflow Trainer Explained (Hands-on) | [Read the Guide](https://newsletter.devopscube.com/p/kubeflow-trainer) |
-| 9 | MLflow Explained for MLOps | 🔜 Coming Next |
-| 10| Hands-on MLflow on Kubernetes | 🔜 Coming Next |
+| 9 | MLflow: A Practical Guide to Experiment Tracking | [Read the Guide](https://newsletter.devopscube.com/p/mlfow) |
+| 10| KServe for MLOps: A Practical Guide | 🔜 Coming Next |
 | 11| Model Monitoring Explained | 🔜 Planned |
 | 12| Model Monitoring - Hands On | 🔜 Planned |
 
 Code: `phase-2-enterprise-setup/`
 
-## Capstone MLOps Project: End to Ends MLops Projects on Kubernetes | 🔜 Planned |
+## Capstone MLOps Project: End-to-End MLOps Projects on Kubernetes | 🔜 Planned |
 
 In this capstone project, you'll build a production-style MLOps platform on Kubernetes by combining everything you've learned throughout this series.
 
@@ -132,6 +130,11 @@ Here is the tech stack you will be using in this setup.
 - [Dagster](https://github.com/dagster-io/dagster): Cloud-native data pipeline orchestrator
 - [Kestra](https://github.com/kestra-io/kestra): Open-source orchestration platform for data, AI, and infrastructure workflows
 - [Flyte](https://flyte.org/): AI orchestration in pure Python
+
+## Engineering Blogs
+
+- [Discord Single-Node to Multi-GPU Clusters](https://discord.com/blog/from-single-node-to-multi-gpu-clusters-how-discord-made-distributed-compute-easy-for-ml-engineers)
+  
 
 ## License
 
