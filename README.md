@@ -72,8 +72,8 @@ Code: `phase-1-local-dev/`
 | 7 | Hands-on Kubeflow on Kubernetes | [Read The Guide](https://devopscube.com/setup-kubeflow-pipelines-kubernetes/) |
 | 8 | Kubeflow Trainer Explained (Hands-on) | [Read the Guide](https://newsletter.devopscube.com/p/kubeflow-trainer) |
 | 9 | MLflow: A Practical Guide to Experiment Tracking | [Read the Guide](https://newsletter.devopscube.com/p/mlfow) |
-| 10| KServe for MLOps: A Practical Guide | 🔜 Coming Next |
-| 11| Model Monitoring Explained | 🔜 Planned |
+| 10| KServe for MLOps: A Practical Guide |[Read the Guide](https://newsletter.devopscube.com/p/kserve)|
+| 11| Model Monitoring Explained | 🔜 Coming Next |
 | 12| Model Monitoring - Hands On | 🔜 Planned |
 
 Code: `phase-2-enterprise-setup/`
