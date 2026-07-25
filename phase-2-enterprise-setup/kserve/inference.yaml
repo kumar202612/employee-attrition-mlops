@@ -1,0 +1,13 @@
+apiVersion: "serving.kserve.io/v1beta1"
+kind: "InferenceService"
+metadata:
+  name: "employee-attrition-champion"
+  namespace: mlflow
+spec:
+  predictor:
+    serviceAccountName: mlflow-mlflow
+    model:
+      modelFormat:
+        name: mlflow
+      protocolVersion: v2
+      storageUri: "s3://dcube-mlflow-artifact-store/1/models/m-14109882a3bc405bb8caa035c92e4919/artifacts"
