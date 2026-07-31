@@ -34,11 +34,11 @@ Most MLOps resources are written for data scientists learning infrastructure. Th
 
 ## What We Build
 
-We'll start with the **basics of building and training a model, then work our way up to production-ready MLOps.
+We will start with the basics of building and training a classic ML model, then work our way up to production-ready MLOps.
 
 Just like a DevOps engineer doesn't write the application but understands how it is built and deployed, an MLOps engineer doesn't need to be a data scientist. Understanding the ML workflow helps you build, automate, deploy, and troubleshoot ML systems effectively.
 
-Everything in this roadmap **runs on Kubernetes and Docker**, and tools you'll use in real-world MLOps platforms.
+Everything in this roadmap **runs on Kubernetes and Docker**, and tools you will use in real-world MLOps platforms.
 
 ---
 
@@ -59,7 +59,18 @@ Code: `phase-1-local-dev/`
 
 ## Phase 2: Enterprise Orchestration for ML
 
-**Goal:** Replace local, manual ML workflows with production-grade orchestration. Versioned data, automated pipelines, experiment tracking, and scalable training.
+**Goal:** Replace local and manual ML workflows with automated, scalable, and production-ready workflows.
+
+This phase covers the following key MLOps areas:
+
+- Data Versioned workflow
+- Automated data pipelines
+- Scalable training pipelines
+- Experiment tracking
+- Scalable model deployment
+- Model monitoring
+
+The following guides explain each of these areas using specific open-source MLOps tools.
 
 | Step | Title | Guide |
 |------|-------|-------|
