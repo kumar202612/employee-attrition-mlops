@@ -84,8 +84,8 @@ The following guides explain each of these areas using specific open-source MLOp
 | 8 | Kubeflow Trainer Explained (Hands-on) | [Read the Guide](https://newsletter.devopscube.com/p/kubeflow-trainer) |
 | 9 | MLflow: A Practical Guide to Experiment Tracking | [Read the Guide](https://newsletter.devopscube.com/p/mlfow) |
 | 10| KServe for MLOps: A Practical Guide |[Read the Guide](https://newsletter.devopscube.com/p/kserve)|
-| 11| Model Monitoring Explained | 🔜 Coming Next |
-| 12| Model Monitoring - Hands On | 🔜 Planned |
+| 11| Model Monitoring Explained | [Read the Guide](https://newsletter.devopscube.com/p/model-monitoring)| 
+| 12| Model Monitoring - Hands On | [Read the Guide](https://devopscube.com/evidently-ai-on-kubernetes/)|
 
 Code: `phase-2-enterprise-setup/`
 
@@ -103,8 +103,8 @@ By the end, you'll have built an enterprise-grade MLOps workflow that mirrors ho
 |-------|-------|-------|--------|
 | 1 | 🤖 Traditional ML | [Local Dev & Pipelines](#phase-1-local-development--data-pipelines) | ✅ Done |
 | 1 | 🤖 Traditional ML | K8s Deploy & Model Serving | ✅ Done |
-| 3 | 🤖 Traditional ML | Enterprise Orchestration | 🔄 In Progress |
-| 4 | 🤖 Traditional ML | Monitor & Observe | 🔜 Planned |
+| 3 | 🤖 Traditional ML | Enterprise Orchestration |  ✅ Done |
+| 4 | 🤖 Traditional ML | Monitor & Observe |  ✅ Done |
 
 ---
 
@@ -118,8 +118,8 @@ Here is the tech stack you will be using in this setup.
 | Model Training | scikit-learn |
 | API / Serving | FastAPI, Flask, Docker, KServe |
 | ML Orchestration | Kubeflow, MLflow Pipelines |
-| Monitoring | Prometheus, Grafana, Evidently AI |
-| Infrastructure | Kubernetes, Helm, GitHub Actions |
+| Monitoring | Evidently AI |
+| Infrastructure | Kubernetes, Helm |
 
 ---
 
@@ -127,6 +127,7 @@ Here is the tech stack you will be using in this setup.
 
 - [Google MLOps Whitepaper](https://cloud.google.com/resources/mlops-whitepaper)
 - [Volkswagen's End-to-End MLOps Platform on AWS](https://aws.amazon.com/solutions/case-studies/volkswagen-mlops/)
+- [Discord Single-Node to Multi-GPU Clusters](https://discord.com/blog/from-single-node-to-multi-gpu-clusters-how-discord-made-distributed-compute-easy-for-ml-engineers)
 
 ## Certifications
 
@@ -141,11 +142,6 @@ Here is the tech stack you will be using in this setup.
 - [Dagster](https://github.com/dagster-io/dagster): Cloud-native data pipeline orchestrator
 - [Kestra](https://github.com/kestra-io/kestra): Open-source orchestration platform for data, AI, and infrastructure workflows
 - [Flyte](https://flyte.org/): AI orchestration in pure Python
-
-## Engineering Blogs
-
-- [Discord Single-Node to Multi-GPU Clusters](https://discord.com/blog/from-single-node-to-multi-gpu-clusters-how-discord-made-distributed-compute-easy-for-ml-engineers)
-  
 
 ## License
 
