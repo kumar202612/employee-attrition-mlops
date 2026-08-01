@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "evidently.uiName" . }}
+  namespace: {{ include "evidently.namespace" . }}
+  labels:
+    {{- include "evidently.labels" . | nindent 4 }}
+    app.kubernetes.io/component: ui
+spec:
+  replicas: {{ .Values.evidently.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ .Release.Name }}
+      app.kubernetes.io/component: ui
+  template:
+    metadata:
+      labels:
+        {{- include "evidently.labels" . | nindent 8 }}
+        app.kubernetes.io/component: ui
+    spec:
+      initContainers:
+        - name: migrate
+          image: "{{ .Values.evidently.image.repository }}:{{ .Values.evidently.image.tag }}"
+          imagePullPolicy: {{ .Values.evidently.image.pullPolicy }}
+          command:
+            - /bin/sh
+            - -c
+          args:
+            - until evidently migrate "$DATABASE_URL"; do sleep 5; done
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "evidently.postgresSecretName" . }}
+                  key: DATABASE_URL
+      containers:
+        - name: evidently-ui
+          image: "{{ .Values.evidently.image.repository }}:{{ .Values.evidently.image.tag }}"
+          imagePullPolicy: {{ .Values.evidently.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.evidently.service.targetPort }}
+              name: http
+          args:
+            - "--port"
+            - {{ .Values.evidently.service.targetPort | quote }}
+            - "--conf-path"
+            - "/app/config.yaml"
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "evidently.postgresSecretName" . }}
+                  key: DATABASE_URL
+          volumeMounts:
+            - name: config
+              mountPath: /app/config.yaml
+              subPath: config.yaml
+              readOnly: true
+            - name: workspace
+              mountPath: /app/workspace
+          resources:
+            {{- toYaml .Values.evidently.resources | nindent 12 }}
+          readinessProbe:
+            httpGet:
+              path: /api/version
+              port: {{ .Values.evidently.service.targetPort }}
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/version
+              port: {{ .Values.evidently.service.targetPort }}
+            initialDelaySeconds: 30
+            periodSeconds: 15
+      volumes:
+        - name: config
+          secret:
+            secretName: {{ include "evidently.configSecretName" . }}
+        - name: workspace
+          {{- if .Values.evidently.workspace.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "evidently.workspacePvcName" . }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}

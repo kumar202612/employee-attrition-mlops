@@ -1,0 +1,18 @@
+Evidently UI has been installed.
+
+Namespace:
+  {{ include "evidently.namespace" . }}
+
+Service:
+  {{ include "evidently.uiName" . }}
+
+{{- if eq .Values.evidently.service.type "NodePort" }}
+NodePort:
+  {{ .Values.evidently.service.nodePort }}
+
+Open one of your node external IPs on this port, for example:
+  http://<node-external-ip>:{{ .Values.evidently.service.nodePort }}
+{{- else }}
+Check the service endpoint with:
+  kubectl get svc {{ include "evidently.uiName" . }} -n {{ include "evidently.namespace" . }}
+{{- end }}

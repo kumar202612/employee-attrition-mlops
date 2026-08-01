@@ -1,0 +1,53 @@
+namespace:
+  create: true
+  name: evidently
+
+nameOverride: ""
+fullnameOverride: ""
+
+evidently:
+  replicaCount: 1
+  image:
+    repository: evidently/evidently-service
+    tag: "0.7.21"
+    pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    port: 80
+    targetPort: 8000
+    nodePort: 30081
+  workspace:
+    persistence:
+      enabled: true
+      size: 5Gi
+      storageClassName: ""
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: "1"
+      memory: 1Gi
+
+postgres:
+  image:
+    repository: postgres
+    tag: "18-alpine"
+    pullPolicy: IfNotPresent
+  auth:
+    database: evidently
+    username: evidently
+    password: evidently
+  service:
+    port: 5432
+  persistence:
+    enabled: true
+    size: 5Gi
+    storageClassName: ""
+  resources:
+    requests:
+      cpu: 250m
+      memory: 512Mi
+    limits:
+      cpu: "1"
+      memory: 1Gi

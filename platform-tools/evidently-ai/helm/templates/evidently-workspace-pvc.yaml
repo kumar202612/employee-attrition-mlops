@@ -1,0 +1,19 @@
+{{- if .Values.evidently.workspace.persistence.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "evidently.workspacePvcName" . }}
+  namespace: {{ include "evidently.namespace" . }}
+  labels:
+    {{- include "evidently.labels" . | nindent 4 }}
+    app.kubernetes.io/component: ui
+spec:
+  accessModes:
+    - ReadWriteOnce
+  {{- if .Values.evidently.workspace.persistence.storageClassName }}
+  storageClassName: {{ .Values.evidently.workspace.persistence.storageClassName | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.evidently.workspace.persistence.size | quote }}
+{{- end }}
