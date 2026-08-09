@@ -15,7 +15,7 @@ def test(input_data: dict):
     df_input = pd.DataFrame([input_data])
 
     # predict() returns [[p_stay, p_leave]]
-    probability = model.predict(df_input)[0]
+    probability = model.predict_proba(df_input)[0]
     p_stay = probability[0]
     p_leave = probability[1]
 
