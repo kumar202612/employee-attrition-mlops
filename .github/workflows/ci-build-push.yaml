@@ -77,7 +77,7 @@ jobs:
           path: ${{ env.WORKDIR }}/artifacts/
       - name: Run smoke test on trained model
         env:
-          PYTHONPATH: .
+          PYTHONPATH: src
         run: |
           python -c "
           from src.model_testing.predict import test
