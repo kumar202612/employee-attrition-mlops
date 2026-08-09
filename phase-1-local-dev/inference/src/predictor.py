@@ -17,7 +17,7 @@ class Predictor:
     def __init__(self):
         model_path = Path("artifacts/model.pkl")
         obj = joblib.load(model_path)
-        self.predict_fn = obj.predict  # bound method — not the full sklearn object
+        self.predict_fn = obj.predict_proba  # bound method — returns [p_stay, p_leave]
 
     def is_loaded(self) -> bool:
         return self.predict_fn is not None
@@ -27,7 +27,6 @@ class Predictor:
         probs   = self.predict_fn(values)[0]
         p_stay  = float(probs[0])
         p_leave = float(probs[1])
-
         return {
             "prediction": int(p_leave >= THRESHOLD),
             "p_leave":    round(p_leave, 4),
