@@ -47,11 +47,31 @@ jobs:
         env:
           PYTHONPATH: src
         run: python src/model_training/01_training.py
+      - name: Run cross-validation across candidate algorithms
+        env:
+          PYTHONPATH: src
+        run: python src/model_training/03_cross_validation.py
+      - name: Tune - select and refit best algorithm
+        env:
+          PYTHONPATH: src
+        run: python src/model_training/04_tuning.py
+      - name: Evaluate final chosen model
+        env:
+          PYTHONPATH: src
+        run: python src/model_training/02_evaluation.py
       - name: Upload trained model artifact
         uses: actions/upload-artifact@v4
         with:
           name: trained-model
           path: ${{ env.WORKDIR }}/artifacts/model.pkl
+      - name: Upload metrics and CV comparison
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-metrics
+          path: |
+            ${{ env.WORKDIR }}/artifacts/metrics.json
+            ${{ env.WORKDIR }}/artifacts/cv_results.json
+            ${{ env.WORKDIR }}/artifacts/feature_importance.png
 
   test:
     runs-on: ubuntu-latest
