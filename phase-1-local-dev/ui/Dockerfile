@@ -1,0 +1,16 @@
+FROM python:3.12-slim
+
+WORKDIR /app
+
+COPY streamlit-requirements.txt .
+RUN pip install --no-cache-dir -r streamlit-requirements.txt
+
+COPY attrition_app.py .
+
+EXPOSE 8501
+
+CMD ["streamlit", "run", "attrition_app.py", \
+     "--server.port=8501", \
+     "--server.address=0.0.0.0", \
+     "--server.enableCORS=false", \
+     "--server.enableXsrfProtection=false"]
