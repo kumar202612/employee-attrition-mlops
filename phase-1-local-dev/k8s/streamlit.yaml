@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: attrition-ui
+  labels:
+    app: attrition-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: attrition-ui
+  template:
+    metadata:
+      labels:
+        app: attrition-ui
+    spec:
+      containers:
+        - name: attrition-ui
+          image: us-east1-docker.pkg.dev/mlops-vertex-ai-tsk1/employee-attrition-repo/employee-attrition-ui:latest
+          ports:
+            - containerPort: 8501
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: attrition-ui
+spec:
+  selector:
+    app: attrition-ui
+  ports:
+    - port: 80
+      targetPort: 8501
+  type: LoadBalancer
