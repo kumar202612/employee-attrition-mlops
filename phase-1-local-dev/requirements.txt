@@ -1,9 +1,8 @@
-scikit-learn
+scikit-learn==1.7.2
 numpy
 pandas
 matplotlib
 seaborn
 pandera
-
 flask
 flask-cors
